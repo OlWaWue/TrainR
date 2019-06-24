@@ -1,4 +1,5 @@
 
+library(ggplot2)
 
 ##
 ## Wichtig ist also die Variabilität in den PK - Parametern
@@ -148,7 +149,7 @@ dat_mc <- NULL
 ## Jede Spalte steht für einen Zeitpunkt der simuliert wurde (diese Zeitpunkte sind in times hinterlegt)
 transposed_data <- t(dat_mc)
 
-## Jede Spalte wird jetzt auf drei Zeilen eingeschrumpft => Eine Zeile für das 5, 10, 15, 20, 25% Percentil, Median 
+## Jede Spalte wird jetzt auf 11 Zeilen eingeschrumpft => Eine Zeile für das 5, 10, 15, 20, 25% Percentil, Median 
 ## und 75,80,85,90 und 95% Percentil
 s <- apply(transposed_data,2,function(x) quantile(x,probs=c(0.05,0.1,0.15,0.2,0.25,0.5,0.75,0.8,0.85,0.9,0.95)))
 
