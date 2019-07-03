@@ -47,6 +47,10 @@ ggplot(simulated_data) + geom_line(aes(x=time, y=simulated_conc)) +
 ## ls steht für least squares => Die Summe der Abweichungsquadrate ist minimal
 optim_res_ls <- optim(par=c(V_pop, ke_pop, ka_pop), fn=obj_func_ls, tdm_data=tdm_data)
 
+## Das sind die Werte für Vc, ke und ka, welche der Algorithmus errechnet hat
+## NUR UNTER DER VORAUSSETZUNG, DASS ABWEICHUNGSQUADRATE MINIMAL SEIN SOLLEN
+## Algorithmus hat also "freie Hand" was die Auswahl der PK-Parameter angeht
+optim_res_ls$par
 
 simulated_ind_data_ls = data.frame(time=sim_times, 
                                 simulated_conc=pk_model_ss(AMT, F_oral, optim_res_ls$par[1], optim_res_ls$par[2], optim_res_ls$par[3], sim_times, tau))
@@ -57,6 +61,10 @@ ggplot(simulated_data) + geom_line(aes(x=time, y=simulated_conc)) +
   geom_line(data=simulated_ind_data_ls, aes(x=time, y=simulated_conc), colour="red") + theme_bw() +
   xlab("Zeit seit letzter Dosis [h]") + ylab("Konzentration [mg/L]")
 
+
+#### Als nächstes wollen wir vorwissen aus dem PK-Modell nutzen!
+## Der Algorithmus wird in der Wahl der PK-Parameter nicht mehr "alleine gelassen",
+## wir geben ihm Grenzen vor, in denen er sich bewegen darf.
 
 ### par ist ein Vektor von ETAS c(ETA_V, ETA_ke, ETA_ka) der optimiert wird 
 ### damit das Ergebnis der OBJ-Fun möglichst klein wird
