@@ -1,16 +1,16 @@
 
 library(ggplot2)
-library(readxl)
+library(readxl) #diese library benötigt man zum Laden der Excel Datei
 
 ## Daten aus Excel-Datei laden
 
 examplocin <- read_excel("examplocin.xlsx")
 
-## Daten anschauen
+## Daten anschauen; head zeigt nur die ersten Zeilen an; tail würde die letzen Zeilen anzeigen
 
 head(examplocin)
 
-### Daten als Punkte in einer Abbildung darstellen
+### Daten als Punkte in einer Abbildung darstellen; DV= dependent variable (z.B. Plasmakonzentration)
 
 ggplot(examplocin) + geom_point(aes(x=TIME, y=DV))
 
@@ -38,7 +38,7 @@ ggplot(examplocin) + geom_point(aes(x=TIME, y=DV, colour=as.factor(SEX) )) + fac
 pk_1cmt_bolus <- function(time, amt, Vd, Cl){
   ke <- Cl/Vd
   
-  y <- amt/Vd*exp(-ke*time)
+  y <- amt/Vd*exp(-ke*time) 
   
   return(y)
 }
@@ -53,10 +53,10 @@ sim_pk_data <- data.frame(TIME = times, DV = sim_cp)
 
 plot(sim_pk_data)
 
-## Populationsmodell berechnen
+## Populationsmodell berechnen, welche Werte für Vd und Cl passsen im Schnitt am besten zu den 4 Patienten-Datensätzen
 
-## TIME wird er aus den Daten nehmen, Vd und Cl wird er nicht in den Daten finden und weiß daher, 
-## dass er diese beiden Parameter ermitteln soll
+## TIME wird er aus den Daten nehmen, Vd und Cl wird er nicht in den Examplocin-Daten finden und weiß daher, 
+## dass er diese beiden Parameter mittels nicht linearer Regression ermitteln soll
 
 pk_mod_pop <- nls(DV~pk_1cmt_bolus(TIME, 100, Vd, Cl), start=list(Vd=80, Cl=15), data=examplocin )
 
@@ -153,7 +153,7 @@ summary(pk_mod_4)
 ## Alle PK Parameter in einer Tabelle zusammenfassen
 
 
-pk_params <- rbind(coef(pk_mod_pop)) ## <- rbind fügt eine weitere Zeilte hinzu
+pk_params <- rbind(coef(pk_mod_pop)) ## <- rbind fügt eine weitere Zeile hinzu
 pk_params <- rbind(pk_params, coef(pk_mod_1)) ## <-- "coef" zieht die Koeffizienten aus dem Modell
 pk_params <- rbind(pk_params, coef(pk_mod_2))
 pk_params <- rbind(pk_params, coef(pk_mod_3))
@@ -213,7 +213,7 @@ summary(lm(SEX~ETA_CL, data = pk_params[-1,]))
 
 summary(lm(ETA_VD~ETA_CL, data = pk_params[-1,]))
 
-set.seed(1)
+
 
 ###
 ## -- PK Modell mit Covariaten
