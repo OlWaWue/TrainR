@@ -52,8 +52,8 @@ simulated_data = data.frame(time=sim_times,
                             simulated_conc=pk_model_ss(AMT, F_oral, V_pop, ke_pop, ka_pop, sim_times, tau))
 
 ## Abbildung erstellen um simulierte Konzentrationen als Linie und gemessene Konzentrationen als Punkte darzustellen
-ggplot(simulated_data) + geom_line(aes(x=time, y=simulated_conc)) + 
-  geom_point(data=tdm_data, aes(x=time, y=measured_conc), size=3, shape=1) + theme_bw() +
+ggplot(simulated_data) + geom_line(aes(x=time, y=________)) + 
+  geom_point(data=tdm_data, aes(x=time, y=________), size=3, shape=1) + theme_bw() +
   xlab("Zeit seit letzter Dosis [h]") + ylab("Konzentration [mg/L]")
 
 
@@ -84,7 +84,7 @@ simulated_ind_data_ls = data.frame(time=sim_times,
 ### Erweitern um die "gefittete" Kurve
 ggplot(simulated_data) + geom_line(aes(x=time, y=simulated_conc)) + 
   geom_point(data=tdm_data, aes(x=time, y=measured_conc), size=3, shape=1) +
-  geom_line(data=simulated_ind_data_ls, aes(x=time, y=simulated_conc), colour="red") + theme_bw() +
+  geom_line(data=________, aes(x=time, y=simulated_conc), colour="red") + theme_bw() +
   xlab("Zeit seit letzter Dosis [h]") + ylab("Konzentration [mg/L]")
 
 
@@ -138,7 +138,7 @@ simulated_ind_data_bay = data.frame(time=sim_times,
 ggplot(simulated_data) + geom_line(aes(x=time, y=simulated_conc)) + 
   geom_point(data=tdm_data, aes(x=time, y=measured_conc), size=3, shape=1) +
   geom_line(data=simulated_ind_data_ls, aes(x=time, y=simulated_conc), colour="red", linetype=2) +
-  geom_line(data=simulated_ind_data_bay, aes(x=time, y=simulated_conc), colour="red") + theme_bw() +
+  geom_line(data=________, aes(x=time, y=simulated_conc), colour="red") + theme_bw() +
   xlab("Zeit seit letzter Dosis [h]") + ylab("Konzentration [mg/L]")
 
 
@@ -146,9 +146,9 @@ ggplot(simulated_data) + geom_line(aes(x=time, y=simulated_conc)) +
 ## Zum Abschluss möchten wir noch wissen, wo in der ETA-Verteilung der ganzen Population
 ## sich die individuellen ETAs diesen Patienten befinden
 ## Dazu simulieren wir 5000 ETAs für V ke und ka mit der jeweiligen SD omega_xx
-MC_ETA_V <- rnorm(n=5000, mean=0, sd=omega_vc)
-MC_ETA_ke <- rnorm(n=5000, mean=0, sd=omega_ke)
-MC_ETA_ka <- rnorm(n=5000, mean=0, sd=omega_ka)
+MC_ETA_V <- rnorm(n=5000, mean=0, sd=________)
+MC_ETA_ke <- rnorm(n=5000, mean=0, sd=________)
+MC_ETA_ka <- rnorm(n=5000, mean=0, sd=________)
 
 eta_dat <- data.frame(ETA_VC=MC_ETA_V,
                       ETA_KE=MC_ETA_ke,
