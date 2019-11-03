@@ -1,0 +1,118 @@
+Nonlinear mixed-effects model fit by the SAEM algorithm
+-----------------------------------
+----          Data             ----
+-----------------------------------
+Object of class SaemixData
+    longitudinal data for use with the SAEM algorithm
+Dataset my_dat 
+    Structured data: DV ~ amt + time | ID 
+    X variable for graphs: time (hr) 
+    covariates: WT (kg), CLCR (mL/min), SEX (-) 
+      reference class for covariate SEX :  0 
+Dataset characteristics:
+    number of subjects:     20 
+    number of observations: 280 
+    average/min/max nb obs: 14.00  /  14  /  14 
+First 10 lines of data:
+   ID  amt       time           DV       WT     CLCR SEX mdv cens occ ytype
+1   1 1000 0.09548704  0.017233544 66.67719 128.4467   0   0    0   1     1
+2   1 1000 0.00000000  0.017233544 66.67719 128.4467   0   0    0   1     1
+3   1 1000 0.25350107  0.031141704 66.67719 128.4467   0   0    0   1     1
+4   1 1000 0.52027021  0.005615781 66.67719 128.4467   0   0    0   1     1
+5   1 1000 0.87447711  0.094669371 66.67719 128.4467   0   0    0   1     1
+6   1 1000 0.87916513  3.456269735 66.67719 128.4467   0   0    0   1     1
+7   1 1000 1.32832924  5.628567506 66.67719 128.4467   0   0    0   1     1
+8   1 1000 1.85451909  7.273849381 66.67719 128.4467   0   0    0   1     1
+9   1 1000 2.50904336 10.681982865 66.67719 128.4467   0   0    0   1     1
+10  1 1000 4.01679661 14.541904184 66.67719 128.4467   0   0    0   1     1
+-----------------------------------
+----          Model            ----
+-----------------------------------
+Nonlinear mixed-effects model
+  Model function:  One-compartment model with first-order absorption
+function(psi,id,xidep) { 
+  dose<-xidep[,1]
+  tim<-xidep[,2]  
+  ka<-psi[id,1]
+  V<-psi[id,2]
+  CL<-psi[id,3]
+  k<-CL/V
+  ypred<-dose*ka/(V*(ka-k))*(exp(-k*tim)-exp(-ka*tim))
+  return(ypred)
+}
+<bytecode: 0x10950d28>
+  Nb of parameters: 3 
+      parameter names:  ka V CL 
+      distribution:
+     Parameter Distribution Estimated
+[1,] ka        log-normal   Estimated
+[2,] V         log-normal   Estimated
+[3,] CL        log-normal   Estimated
+  Variance-covariance matrix:
+   ka V CL
+ka  1 0  0
+V   0 1  0
+CL  0 0  1
+  Error model: constant , initial values: a.=1 
+  Covariate model:
+   [,1] [,2] [,3]
+WT    0    1    0
+    Initial values
+              ka  V    CL
+Pop.CondInit 1.0 20  0.50
+Cov.CondInit 0.1  0 -0.01
+-----------------------------------
+----    Key algorithm options  ----
+-----------------------------------
+    Estimation of individual parameters (MAP)
+    Estimation of standard errors and linearised log-likelihood
+    Estimation of log-likelihood by importance sampling
+    Number of iterations:  K1=300, K2=100 
+    Number of chains:  3 
+    Seed:  632545 
+    Number of MCMC iterations for IS:  5000 
+    Simulations:
+        nb of simulated datasets used for npde:  1000 
+        nb of simulated datasets used for VPC:  100 
+    Input/output
+        save the results to a file:  TRUE 
+        save the graphs to files:  TRUE 
+        directory where results should be saved:  newtheo 
+----------------------------------------------------
+----                  Results                   ----
+----------------------------------------------------
+-----------------  Fixed effects  ------------------
+----------------------------------------------------
+     Parameter  Estimate SE     CV(%) p-value
+[1,] ka         0.219    0.0984 45.0  -      
+[2,] V          7.922    6.2049 78.3  -      
+[3,] beta_WT(V) 0.026    0.0072 27.8  0.00016
+[4,] CL         7.777    0.8160 10.5  -      
+[5,] a.         2.408    0.1092  4.5  -      
+----------------------------------------------------
+-----------  Variance of random effects  -----------
+----------------------------------------------------
+   Parameter Estimate SE    CV(%)
+ka omega2.ka 0.12     0.241 202  
+V  omega2.V  0.17     0.204 121  
+CL omega2.CL 0.10     0.056  54  
+----------------------------------------------------
+------  Correlation matrix of random effects  ------
+----------------------------------------------------
+          omega2.ka omega2.V omega2.CL
+omega2.ka 1         0        0        
+omega2.V  0         1        0        
+omega2.CL 0         0        1        
+----------------------------------------------------
+---------------  Statistical criteria  -------------
+----------------------------------------------------
+Likelihood computed by linearisation
+      -2LL= 1343.96 
+      AIC = 1359.96 
+      BIC = 1367.926 
+
+Likelihood computed by importance sampling
+      -2LL= 1348.432 
+      AIC = 1364.432 
+      BIC = 1372.398 
+----------------------------------------------------
