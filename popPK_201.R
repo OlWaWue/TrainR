@@ -51,7 +51,7 @@ data <- data[-which(data$time==0 & data$evid==0),]
 
 write.csv(data, "pat_dat.csv", row.names = F)
 
-
+data <- read.csv("pat_dat.csv")
 
 d <- nmDataConvert(data);
 
@@ -114,6 +114,7 @@ library(xpose)
 
 dv_vs_ipred(xpdb)
 
+xpose::eta_distrib(xpdb)
 
 
 
