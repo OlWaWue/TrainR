@@ -41,7 +41,10 @@ data$LNDV <- log(data$DV)
 
 
 
+
 data <- data[-which(data$time==0 & data$evid==0),]
+
+data <- sample_n(data, size=20*4)
 
 write.csv(data, "pat_dat.csv", row.names = F)
 
