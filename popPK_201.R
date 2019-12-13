@@ -23,7 +23,7 @@ dat <- as.data.frame(res)
 
 
 
-sample_dat <- filter(dat, dat$time %in% c(0, 0.5, 0.75, 1, 2, 2.5, 4, 6, 8, 12, 24))
+sample_dat <- filter(dat, dat$time %in% c(0, 0.5, 2, 4, 8, 12, 24))
 
 del_col <- which(colnames(sample_dat) %in% c("GUT", "CENT", "PER", "KA_ind", "CL_ind", "V_ind", "KE_ind", "VP_ind", "Q_ind", "IPRED"))
 
@@ -44,7 +44,6 @@ data$LNDV <- log(data$DV)
 
 data <- data[-which(data$time==0 & data$evid==0),]
 
-data <- sample_n(data, size=20*4)
 
 write.csv(data, "pat_dat.csv", row.names = F)
 
