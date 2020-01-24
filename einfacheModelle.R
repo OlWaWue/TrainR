@@ -102,7 +102,7 @@ print(fit_with_hessian$hessian)
 ## Wir benötigen außerdem die residuelle Varianz
 
 
-## Berechnung der residuellen Varianz Maximum likelihood (Zur Minimierung wurde OLS verwendet)
+## Berechnung der residuellen Varianz mittels Maximum likelihood (Zur Minimierung wurde OLS verwendet)
 sig2 <- fit$value/(nrow(data_for_lin_reg)-2) ## Abzug von zwei (Modellparametern) ## von den Freiheitsgeraden
 
 print(sig2)

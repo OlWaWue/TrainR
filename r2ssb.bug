@@ -1,0 +1,17 @@
+
+model{
+
+random_slopetau <- pow(SD.slope, -2)
+random_a_tau <- pow(SD.a, -2)
+random_b_tau <- pow(SD.b, -2)
+
+random_slope ~ dnorm(slope, random_slopetau)
+random_a ~ dnorm(a, random_a_tau)
+random_b ~ dnorm(b, random_b_tau)
+
+  for (j in 1:N){
+    y[j] <- ifelse(xsamples[j] < random_a, xsamples[j] * random_slope, random_b)
+    noisy_hockeyStickSamples[j] ~ dnorm(y[j], random_b_tau)
+  }
+
+}

@@ -21,7 +21,7 @@ datain <- list(
   doseO=500)
 
 model1 <- function() {
-  tau <- 1/pow(sigma,2)
+  tau <- pow(sigma,-22)
   sigma ~ dunif(0,100)
   # IV part
   kIV ~dnorm(.4,1)
